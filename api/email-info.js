@@ -25,11 +25,15 @@ export default async function handler(req, res) {
         url.searchParams.set("q", email);
 
         const response = await fetch(url);
-        const data = await response.text();
 
-        res.status(response.status);
+        let data = await response.text();
+
+        // Developer name replacement
+        data = data.replaceAll("@flirts_x", "@Boss_Hcrr");
 
         const contentType = response.headers.get("content-type");
+
+        res.status(response.status);
 
         if (contentType) {
             res.setHeader("Content-Type", contentType);
